@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissor</title>
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <button class="btn" id="stone" value="stone">Stone</button>
+            <button class="btn" id="paper" value="paper">Paper</button>
+            <button class="btn" id="scissor" value="scissor">Scissor</button>
+            <div class="result" >kuchh bhi</div>
+            <button id="reset" style="display: none;">Reset</button>
+        </div>
+    </div>
+    
+    <script>
+        options = ["stone", "paper", "scissor"];
+        function getComChoice() {
+            randomNum = Math.floor(Math.random() * options.length);
+            randomWord = options[randomNum];
+            return randomWord;
+        }
+
+        function detWinner(pChoice, cChoice) {
+            if (pChoice === cChoice) {
+                return "Its a Tie!";
+            }
+            else if ((pChoice === "stone" && cChoice === "scissor") || (pChoice === "paper" && cChoice === "stone") || (pChoice === "scissor" && cChoice === "paper")) {
+                return "You win!";
+            }
+            else{
+                return "Computer Wins!";
+            }
+
+        }
+
+        // console.log(randomWord);
+
+        const all_options = document.querySelectorAll(".btn");
+        const resultDiv = document.querySelector(".result");
+        const resetButton = document.getElementById("reset");
+
+        // console.log(all_options[2]);
+
+        var val;
+        all_options.forEach((val) => {
+            val.addEventListener("click", (e) => {
+                const pChoice = val.id;
+                // console.log(pChoice);
+                const cChoice = getComChoice();
+                const winner = detWinner(pChoice, cChoice);
+                resultDiv.innerHTML = `You Chose ${pChoice}. Computer Chose ${cChoice}.${winner}`;
+                resetButton.style.display = "block";
+            });
+        });
+
+        resetButton.addEventListener("click", () => {
+            resultDiv.textContent = "Choose your weapon:";
+            resetButton.style.display = "none";
+        });
+        console.log(val);
+
+
+    </script>
+
+</body>
+
+</html>

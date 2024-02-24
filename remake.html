@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock paper scissor</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <button class="btn" id="rock">Rock</button>
+        <button class="btn" id="paper">Paper</button>
+        <button class="btn" id="scssor">Scissor</button>
+        <div class="result">This is the result area</div>
+    </div>
+    <script>
+        options = ["rock", "paper", "scissor"];
+        function compC() {
+            randomNum = Math.floor(Math.random() * options.length);
+            // console.log(randomNum);
+            randomWord = options[randomNum];
+            console.log(randomWord);
+            return randomWord;
+        }
+        function cheWinner(pChoice, cChoice) {
+            if (pChoice == cChoice) {
+                return "It's Draw";
+            }
+            else if ((pChoice == "rock" && cChoice == "scissor") || (pChoice == "paper" && cChoice == "rock") || (pChoice == "scissor" && cChoice == "paper")) {
+                return "You win!";
+            }
+            else {
+                return "Computer wins!"
+            }
+        }
+        const all_options = document.querySelectorAll(".btn");
+        const resultDiv = document.querySelector(".result");
+        // const resetButton = document.getElementById("reset");
+        var val;
+        all_options.forEach((val) => {
+            val.addEventListener("click", (e) => {
+                const pChoice = val.id;
+                const cChoice = compC();
+                const winner = cheWinner(pChoice, cChoice);
+                resultDiv.innerHTML = `You Chose ${pChoice} and Computer chose ${cChoice}, and ${winner}`
+            })
+        })
+        compC()
+    </script>
+
+
+</body>
+
+</html>
